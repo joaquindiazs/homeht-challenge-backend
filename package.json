@@ -1,0 +1,35 @@
+{
+  "name": "homeht-challenge-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node app.ts",
+    "start:dev": "./node_modules/nodemon/bin/nodemon.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joaquindiazs/homeht-challenge-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joaquindiazs/homeht-challenge-backend/issues"
+  },
+  "homepage": "https://github.com/joaquindiazs/homeht-challenge-backend#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.7",
+    "typeorm": "^0.2.30",
+    "typescript-ioc": "^3.2.2",
+    "typescript-rest": "^3.0.2",
+    "typescript-rest-ioc": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.11",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.3"
+  }
+}
