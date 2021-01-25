@@ -16,17 +16,17 @@ export class Item {
     value!: number;
 
     @Column()
-    time!: string;
+    time!: Date;
 
     @Column()
     isImported!: boolean;
 
-    @Column()
-    createdAt!: string;
+    @Column({nullable: true})
+    createdAt!: Date;
+
+    @Column({nullable: true})
+    updatedAt!: Date;
 
     @Column()
-    updatedAt!: string;
-
-    @Column()
-    isDeleted!: false;
+    isDeleted!: boolean;
 }
