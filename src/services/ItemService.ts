@@ -15,12 +15,13 @@ export class ItemService {
     @QueryParam("contractId") contractId: number,
     @QueryParam("startDate") startDate: string,
     @QueryParam("endDate") endDate: string
-  ): string {    
-    const repository = getManager().getRepository(Item)
-    repository.findOne({ contractId: contractId }).then(items => {
-        console.log(items)
+  ): Promise<Array<Item>> {    
+    return new Promise<Array<Item>>(async (resolve, reject) => {
+        const repository = getManager().getRepository(Item)
+        repository.find({ contractId: contractId }).then((items: Array<Item>) => {
+            return resolve(items)
+        })
     })
-    return 'Hola'
   }
 
   /**
@@ -29,8 +30,7 @@ export class ItemService {
    */
   @POST
   addItem(item: Item): Promise<Item> {
-    return new Promise<Item>(async (resolve, reject) => {
-        console.log(item)
+    return new Promise<Item>((resolve, reject) => {
         const repository = getManager().getRepository(Item)
         const newObj = repository.create(item)
         repository.save(newObj).then((newItem: Item) => {
@@ -38,6 +38,40 @@ export class ItemService {
         })
     })
   }
+
+  /**
+   * update one item
+   * @param id
+   */
+  @PUT
+  updateItem(@QueryParam('id') id: number, item: Item): Promise<Item> {
+    return new Promise<any>(async(resolve, reject) => {
+        const repository = getManager().getRepository(Item)
+        await repository.update(id, item)
+        repository.findOne(id).then((updateditem) => {
+            if (!updateditem) reject('item not found')
+            return resolve(updateditem)
+        })
+    })
+  }
+
+  /**
+   * delete one item
+   * @param id
+   */
+  @DELETE
+  deleteItem(@QueryParam('id') id: number): Promise<string> {
+    return new Promise<any>((resolve, reject) => {
+        const repository = getManager().getRepository(Item)
+        repository.findOne(id).then(async(item) => {
+            if (!item) reject ('item not found')
+            await repository.delete(id)
+            resolve('Item with id ' + id + ' was deleted')
+        })
+    })
+  }
 }
 
 //curl -d '{"contractId":1, "description":"value2", "value": 100, "isImported": true, "time":"1234","createdAt":"asdas", "updatedAt":"asdas","isDeleted":"asdas"}' -H "Content-Type: application/json" -X POST http://localhost:3000/item
+//curl -X DELETE "http://localhost:3000/item?id=1"
+//curl -d '{"contractId":1, "description":"value11111111111111111", "value": 500, "isImported": true, "time":"1234","createdAt":"asdas", "updatedAt":"asdas","isDeleted":"asdas"}' -H "Content-Type: application/json" -X PUT "http://localhost:3000/item?id=1"
