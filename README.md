@@ -42,4 +42,4 @@ Dockerizing the database: 8.0.23 MySQL Community Server
   
   ```
   
-  ## [Short summary of technical choices, the decisions you made and what could be improved.](https://gist.github.com/joaquindiazs/a9e70534037b93eb4ca5d8e78daf09b0)
+  ## [Short summary of technical choices, the decisions I made and what could be improved.](https://gist.github.com/joaquindiazs/a9e70534037b93eb4ca5d8e78daf09b0)
